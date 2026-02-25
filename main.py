@@ -20,10 +20,15 @@ app.add_middleware(
         "http://localhost:5173", 
         "https://niondata.pages.dev"
     ],
+    allow_origin_regex=r"https://.*\.pages\.dev",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def read_root():
+    return {"status": "NionData Engine Online", "version": "1.0"}
 
 # Initialize external clients
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
